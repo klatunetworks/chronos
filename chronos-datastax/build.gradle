@@ -1,15 +1,15 @@
 
 description = 'chronos datastax'
 dependencies {
-  compile project(':chronos-api')
-    compile group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version:'3.0.2'
-    compile group: 'org.slf4j', name: 'slf4j-api', version:'1.6.6'
-    testCompile group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version:'3.0.2', classifier:'sources'
-    testCompile group: 'org.slf4j', name: 'slf4j-simple', version:'1.6.6'
+  implementation project(':chronos-api')
+    implementation group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version:'3.0.2'
+    implementation group: 'org.slf4j', name: 'slf4j-api', version:'1.6.6'
+    testImplementation group: 'com.datastax.cassandra', name: 'cassandra-driver-core', version:'3.0.2'
+    testImplementation group: 'org.slf4j', name: 'slf4j-simple', version:'1.6.6'
 }
 
 task packageTests(type: Jar) {
   from sourceSets.test.output
-  classifier = 'tests'
+  archiveClassifier = 'tests'
 }
 artifacts.archives packageTests
