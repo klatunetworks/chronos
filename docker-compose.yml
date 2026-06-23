@@ -10,7 +10,6 @@ services:
       - CASSANDRA_CLUSTER_NAME=TestCluster
       # Explicitly restrict heap size to stop Out-Of-Memory crashes
       - MAX_HEAP_SIZE=1G
-      - HEAP_NEWSIZE=256M
       # Give the container enough physical host memory to run
     deploy:
       resources:
