@@ -4,6 +4,7 @@ dependencies {
   implementation project(':chronos-api')
     implementation group: 'org.slf4j', name: 'slf4j-api', version:'1.6.6'
     implementation group: 'redis.clients', name: 'jedis', version:'2.1.0'
+    implementation group: 'com.google.guava', name: 'guava', version:'19.0'
     testImplementation group: 'redis.clients', name: 'jedis', version:'2.1.0'
 }
 
