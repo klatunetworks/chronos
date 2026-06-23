@@ -25,35 +25,31 @@ jobs:
           - 7000:7000
           - 7001:7001
           - 7199:7199
-        environment:
+        env:
           - CASSANDRA_CLUSTER_NAME=TestCluster
           # Explicitly restrict heap size to stop Out-Of-Memory crashes
           - MAX_HEAP_SIZE=1G
           - HEAP_NEWSIZE=256M
           # Give the container enough physical host memory to run
-        deploy:
-          resources:
-            limits:
-              memory: 2G
-            reservations:
-              memory: 1G
-        healthcheck:
-          test: ["CMD-SHELL", "nodetool status | grep -E '^UN\\s+' || exit 1"]
-          interval: 15s
-          timeout: 10s
-          retries: 5
-          start_period: 45s
+        options: >-
+          --memory 2G
+          --memory-reservation 1G
+          --health-cmd "nodetool status | grep -E '^UN\\s+' || exit 1"
+          --health-interval 15s
+          --health-retries 5
+          --health-start-period 45s
+          --health-timeout 10s
 
       redis:
         image: redis:${{ matrix.redis }}
         ports:
           - 6379:6379
-        healthcheck:
-          test: ["CMD", "redis-cli", "ping"]
-          interval: 5s
-          timeout: 3s
-          retries: 5
-          start_period: 5s
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 5s
+          --health-retries 5
+          --health-start-period 5s
+          --health-timeout 3s
 
     name: Java ${{ matrix.java-distribution }}/${{ matrix.java }} sample
     steps:
