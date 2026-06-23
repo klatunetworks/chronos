@@ -34,10 +34,8 @@ jobs:
           --memory 2G
           --memory-reservation 1G
           --health-cmd "nodetool status | grep -E '^UN\\s+' || exit 1"
-          --health-start-period 60s
-          --health-start-interval 30s
           --health-interval 30s
-          --health-retries 5
+          --health-retries 10
           --health-timeout 10s
 
       redis:
@@ -48,7 +46,6 @@ jobs:
           --health-cmd "redis-cli ping"
           --health-interval 5s
           --health-retries 5
-          --health-start-period 5s
           --health-timeout 3s
 
     name: Java ${{ matrix.java-distribution }}/${{ matrix.java }} sample
