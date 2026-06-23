@@ -63,6 +63,6 @@ jobs:
         with:
           distribution: ${{ matrix.java-distribution }}
           java-version: ${{ matrix.java }}
-      - uses: eskatos/gradle-command-action@v1
-        with:
-          arguments: clean test
+
+      - shell: bash
+        run: ./gradlew clean test
