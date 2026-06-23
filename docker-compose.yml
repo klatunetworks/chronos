@@ -1,0 +1,16 @@
+services:
+    cassandra:
+        image: datastax/dse-server:5.1.50
+        environment:
+            DS_LICENSE: accept
+        ports:
+            - 9042:9042
+            - 7000:7000
+            - 7001:7001
+            - 7199:7199
+        profiles:
+            - test
+    redis:
+        image: redis:8
+        profiles:
+            - test
