@@ -72,3 +72,5 @@ jobs:
         if: always()
         with:
           files: '**/build/test-results/**/*.xml'
+          comment_mode: failures
+          check_name: Java ${{ matrix.java.distribution }}/${{ matrix.java.version }} Test Results
