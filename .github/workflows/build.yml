@@ -13,7 +13,7 @@ jobs:
           - temurin
           - oracle
         cassandra:
-          - '5'
+          - '4'
         redis:
           - '8'
 
@@ -27,9 +27,8 @@ jobs:
           - 7199:7199
         env:
           CASSANDRA_CLUSTER_NAME: TestCluster
-          # Explicitly restrict heap size to stop Out-Of-Memory crashes
           MAX_HEAP_SIZE: 1G
-          # Give the container enough physical host memory to run
+          HEAP_NEWSIZE: 256M
         options: >-
           --memory 2G
           --memory-reservation 1G
