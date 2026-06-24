@@ -59,4 +59,4 @@ jobs:
           java-version: ${{ matrix.java }}
 
       - shell: bash
-        run: ./gradlew clean test
+        run: ./gradlew clean test --no-daemon --parallel --continue
