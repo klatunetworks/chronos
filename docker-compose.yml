@@ -17,7 +17,7 @@ services:
         reservations:
           memory: 1G
     healthcheck:
-      test: ["CMD-SHELL", "nodetool status | grep -E '^UN\\s+' || exit 1"]
+      test: "cqlsh -e 'describe keyspaces'"
       interval: 15s
       timeout: 10s
       retries: 5
