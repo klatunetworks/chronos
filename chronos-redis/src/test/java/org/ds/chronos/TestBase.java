@@ -22,7 +22,7 @@ public class TestBase {
 			config.testOnBorrow = true;
 			config.maxActive = 4;
 			config.maxWait = 2000;
-			pool = new JedisPool(config, "localhost");
+			pool = new JedisPool(config, System.getenv("REDIS_HOST"), Integer.parseInt(System.getenv("REDIS_PORT")));
 		}
 		return pool;
 	}
