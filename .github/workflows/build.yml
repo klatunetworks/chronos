@@ -67,7 +67,7 @@ jobs:
         if: (!cancelled())
         uses: actions/upload-artifact@v7
         with:
-          name: Test Results (Java ${{ matrix.java.distribution }}/${{ matrix.java.version }})
+          name: java-${{ matrix.java.distribution }}-${{ matrix.java.version }})-test-results
           path: '**/build/test-results/**/*.xml'
 
   publish-test-results:
