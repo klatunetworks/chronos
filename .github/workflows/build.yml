@@ -63,10 +63,32 @@ jobs:
         shell: bash
         run: ./gradlew clean test --no-daemon --parallel --continue
 
+      - name: Upload Test Results
+        if: (!cancelled())
+        uses: actions/upload-artifact@v7
+        with:
+          name: Test Results (Java ${{ matrix.java.distribution }}/${{ matrix.java.version }})
+          path: '**/build/test-results/**/*.xml'
+
+  publish-test-results:
+    name: "Publish Tests Results"
+    needs: test
+    runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: read
+      issues: read
+    if: (!cancelled())
+
+    steps:
+      - name: Download Artifacts
+        uses: actions/download-artifact@v7
+        with:
+          path: artifacts
+
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action@v2
-        if: always()
         with:
-          files: '**/build/test-results/**/*.xml'
           comment_mode: failures
-          check_name: Java ${{ matrix.java.distribution }}/${{ matrix.java.version }} Test Results
+          files: "artifacts/**/*.xml"
