@@ -12,10 +12,6 @@ jobs:
             version: 8
           - distribution: temurin
             version: 11
-          - distribution: temurin
-            version: 17
-          - distribution: oracle
-            version: 17
         cassandra:
           - '5'
         redis:
