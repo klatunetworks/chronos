@@ -18,7 +18,7 @@ public class TestBase {
 	@BeforeClass
 	public static void setup() throws ChronosException {
 		if (cluster == null) {
-			cluster = new Cluster.Builder().addContactPoints("127.0.0.1").build();
+			cluster = new Cluster.Builder().addContactPoints(System.getenv("CASSANDRA_HOST")).build();
 			session = cluster.connect();
 
 			try {

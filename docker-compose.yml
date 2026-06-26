@@ -1,0 +1,40 @@
+services:
+  cassandra:
+    image: cassandra:5
+    ports:
+      - 9042:9042
+      - 7000:7000
+      - 7001:7001
+      - 7199:7199
+    environment:
+      - CASSANDRA_CLUSTER_NAME=TestCluster
+      - MAX_HEAP_SIZE=1G
+      - HEAP_NEWSIZE=256M
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 1G
+    healthcheck:
+      test: "cqlsh -e 'describe keyspaces'"
+      interval: 15s
+      timeout: 10s
+      retries: 5
+      start_period: 45s
+
+    profiles:
+      - test
+
+  redis:
+    image: redis:8
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    profiles:
+      - test
